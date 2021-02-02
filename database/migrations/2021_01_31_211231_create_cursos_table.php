@@ -14,13 +14,13 @@ class CreateCursosTable extends Migration
     public function up()
     {
         Schema::create('cursos', function (Blueprint $table) {
-            $table->increments('id_curso')->nullable(false);
+            $table->increments('id')->nullable(false);
             $table->string('descricao_curso', '100')-> nullable (false);
             $table->date('data_inicio')-> nullable (false);
             $table->date('data_fim')-> nullable (false);
             $table->integer('quantidade_alunos')-> nullable ();
-            $table->integer('categoria')-> nullable (false)->unsigned();
-            $table->foreign('categoria')->references('codigo')->on('categorias');
+            $table->integer('categoria_id')-> nullable (false)->unsigned();
+            $table->foreign('categoria_id')->references('id')->on('categorias');
             $table->timestamps();
         });
     }

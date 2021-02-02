@@ -10,4 +10,9 @@ class Categoria extends Model
     protected $fillable = ['descricao'];
 
     use HasFactory;
+
+    public function curso()
+    {
+        return $this->belongsTo(Curso::class);
+    }
 }

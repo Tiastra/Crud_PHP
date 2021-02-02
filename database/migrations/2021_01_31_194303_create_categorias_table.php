@@ -15,17 +15,17 @@ class CreateCategoriasTable extends Migration
     public function up()
     {
         Schema::create('categorias', function (Blueprint $table) {
-            $table->increments('codigo')->nullable(false);
+            $table->increments('id')->nullable(false);
             $table->string('descricao', '30')->nullable(false);
             $table->timestamps();
         });
 
         DB::table('categorias')->insert(
             array(
-                array('codigo' => 1 , 'descricao' => 'Comportamental'),
-                array('codigo' => 2 , 'descricao' => 'Programação'),
-                array('codigo' => 3 , 'descricao' => 'Qualidade'),
-                array('codigo' => 4 , 'descricao' => 'Processos')
+                array('id' => 1 , 'descricao' => 'Comportamental'),
+                array('id' => 2 , 'descricao' => 'Programação'),
+                array('id' => 3 , 'descricao' => 'Qualidade'),
+                array('id' => 4 , 'descricao' => 'Processos')
             )
         );
     }
