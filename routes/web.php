@@ -18,6 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//Route::resource('cursos', CursosController::class);
+
 Route::get('cursos/novo', [CursosController::class, 'create']);
 Route::post('cursos/novo', [CursosController::class, 'store'])->name('criar_curso');
 Route::get('cursos/lista', [CursosController::class, 'index'])->name('listar_cursos');
+Route::get('cursos/editar/{id}', [CursosController::class, 'edit'])->name('editar_curso');
+Route::put('cursos/editar/{id}', [CursosController::class, 'update'])->name('salvar_edicao');
+Route::delete('cursos/deletar/{id}', [CursosController::class, 'destroy'])->name('deletar_curso');

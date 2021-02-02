@@ -30,8 +30,9 @@
                 <td> {{ $curso->quantidade_alunos }}</td>
                 <td> {{ $curso->categoria_id }}</td>
                 <td>
-                <a href="" class="btn btn-warning btn-sm">Editar</a>
-                <form method="POST" action="" style="display: inline" onsubmit="return confirm('Deseja excluir este registro?');" >
+                <a href=" {{ route('editar_curso', ['id' => $curso->id]) }} " class="btn btn-warning btn-sm">Editar</a>
+                <form method="POST" action="{{ route('deletar_curso', ['id' => $curso->id]) }}"
+                    style="display: inline" onsubmit="return confirm('Deseja excluir este registro?');" >
                     @csrf
                     <input type="hidden" name="_method" value="delete" >
                     <button class="btn btn-danger btn-sm">Excluir</button>
