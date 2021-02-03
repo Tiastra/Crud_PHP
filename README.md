@@ -9,7 +9,7 @@ Instruções para rodar a aplicação (CRUD) em um servidor local:
  
  3- Instalando o Laravel. Com o composer devidamente instalado abra um terminal no seu diretório de preferência e digite o seguinte comando: `composer create-project --prefer-dist laravel/laravel Crud_PHP`
  
- 4- Crie um database chamado castcursos.
+ 4- Crie um database chamado `castcursos`.
  
  5- Rodar as migrantions. No seu terminal, na raiz do projeto, digite o seguinte comando: `php artisan migrate`. Verifique no banco se as tabelas foram criadas.
  
