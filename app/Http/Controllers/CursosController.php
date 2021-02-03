@@ -2,27 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categoria;
 use App\Models\Curso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use Illuminate\Validation\ValidationException;
 
 class CursosController extends Controller
 {
 
     public function create()
     {
-        return view('cursos.form');
+        $categorias = Categoria::all();
+        return view('cursos.form', compact('categorias'));
     }
 
     public function store(Request $request, Curso $curso)
     {
-
-        $this->validate($request, [
-            'descricao_curso' => 'required|max:100',
-            'data_inicio' => 'required',
-            'data_fim' => 'required',
-            'categoria_id' => 'required',
-        ]);
-
         $insert = $curso->create($request->all());
         if ($insert){
             return redirect()
@@ -34,10 +30,23 @@ class CursosController extends Controller
             ->with('error', 'Falha ao inserir');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $cursos = Curso::all();
-        return view('cursos.index', compact('cursos'));
+
+        $hoje = date('d-m-Y');
+        //dd($hoje);
+
+        if ($request->has('search')) {
+            $search = $request->get('search');
+            $cursos = Curso::where('descricao_curso', 'like', "%{$search}%")->paginate(15);
+            $cursos->appends(['search' => $search]);
+
+
+            return view('cursos.index', compact('cursos', 'search'));
+        } else {
+            $cursos = Curso::all();
+            return view('cursos.index', compact('cursos'));
+        }
     }
 
     public function show($id)
@@ -48,10 +57,10 @@ class CursosController extends Controller
 
     public function edit($id)
     {
+        $categorias = Categoria::all();
         $cursos = Curso::findOrFail($id);
-
         if ($cursos) {
-            return view('cursos.update', compact('cursos'));
+            return view('cursos.update', compact('cursos','categorias'));
         } else {
             return redirect()->back();
         }
@@ -60,7 +69,6 @@ class CursosController extends Controller
     public function update(Request $request, $id)
     {
         $cursos = Curso::where('id', $id)->update($request->except('_token', '_method'));
-
         if ($cursos) {
             return redirect()->route('listar_cursos');
         }
@@ -69,7 +77,6 @@ class CursosController extends Controller
     public function destroy($id)
     {
         $cursos = Curso::where('id', $id)->delete();
-
         if ($cursos) {
             return redirect()->route('listar_cursos');
         }
