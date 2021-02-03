@@ -10,6 +10,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+    <header class="masthead mb-auto">
+        <div class="inner">
+            <nav class="nav nav-masthead justify-content-center">
+                <a class="nav-link active" href="http://localhost:8000/">Home</a>
+                <a class="nav-link" href="{{route('listar_cursos')}}">Cursos</a>
+                <a class="nav-link" href="#">Contato</a>
+            </nav>
+        </div>
+    </header>
+</div>
 @yield('content')
 </body>
 </html>

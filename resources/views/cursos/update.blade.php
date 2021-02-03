@@ -18,19 +18,19 @@
                     <div class="form-row form-group">
                         <label for="descricao_curso" class="col-form-label col-sm-2 text-right"> Curso </label>
                         <div class="col-sm-4">
-                            <input name="descricao_curso" value="{{$cursos->descricao_curso}}" class="form-control" placeholder="Defina o nome">
+                            <input name="descricao_curso" value="{{$cursos->descricao_curso}}" class="form-control" placeholder="Defina o nome" required>
                         </div>
                     </div>
                     <div class="form-row form-group">
                         <label for="data_inicio" class="col-form-label col-sm-2 text-right"> Data de Início </label>
                         <div class="col-sm-4">
-                            <input type="date" value="{{$cursos->data_inicio}}" name="data_inicio" class="form-control" placeholder="Defina a data">
+                            <input type="date" value="{{$cursos->data_inicio}}" name="data_inicio" class="form-control" placeholder="Defina a data" required>
                         </div>
                     </div>
                     <div class="form-row form-group">
                         <label for="data_fim" class="col-form-label col-sm-2 text-right"> Data de Término </label>
                         <div class="col-sm-4">
-                            <input type="date" value="{{$cursos->data_fim}}" name="data_fim" class="form-control" placeholder="Defina a data">
+                            <input type="date" value="{{$cursos->data_fim}}" name="data_fim" class="form-control" placeholder="Defina a data" required>
                         </div>
                     </div>
                     <div class="form-row form-group">
@@ -42,7 +42,21 @@
                     <div class="form-row form-group">
                         <label for="categoria_id" class="col-form-label col-sm-2 text-right"> Categoria </label>
                         <div class="col-sm-4">
-                            <input type="number" value="{{$cursos->categoria_id}}" name="categoria_id" class="form-control" placeholder="Categoria do Curso">
+                            <select name="categoria_id" class="form-control"  required>
+                                <option value="" disabled selected>{{$cursos->categoria->descricao}}</option>
+                                @if($categorias->count())
+                                    @foreach ( $categorias as $categoria )
+
+                                        <option value="{{ $categoria->id }}">
+                                            {{ $categoria->descricao }}
+                                        </option>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="6">Nenhum registro encontrado</td>
+                                    </tr>
+                                @endif
+                            </select>
                         </div>
                     </div>
                 </div>
